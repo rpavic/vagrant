@@ -1,0 +1,4 @@
+.vagrant
+*.mof
+*.zip
+*.log

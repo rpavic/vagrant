@@ -1,0 +1,15 @@
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "gusztavvargadr/windows-server"
+  config.vm.hostname = "dc"
+  config.vm.synced_folder "../scripts", "C:\\Install"
+  # Configure VM settings using vboxmanage flags
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--name", "dc", "--vram", "128", "--cpus", "4", "--memory", "4096"]
+  end
+  config.vm.network "forwarded_port", guest: 443, host: 443
+  # Bootstrap the VM
+  config.vm.provision "shell", name: "Bootstrap", inline: ". C:\\Install\\BootstrapFunctions.ps1; Set-Locale; Install-Code"
+  config.vm.provision "shell", name: "Install-DSCDependancy",  inline: "C:\\Install\\InstallDSCDependancy.ps1"
+  config.vm.provision "shell", name: "Deploy PDC", inline: "C:\\Install\\DeployAD.ps1"
+end
