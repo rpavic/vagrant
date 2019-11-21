@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--name", "dc", "--vram", "128", "--cpus", "4", "--memory", "4096"]
   end
-  config.vm.network "forwarded_port", guest: 443, host: 443
+  config.vm.network "forwarded_port", guest: 443, host: 44443
   # Bootstrap the VM
   config.vm.provision "shell", name: "Bootstrap", inline: ". C:\\Install\\BootstrapFunctions.ps1; Set-Locale; Install-Code"
   config.vm.provision "shell", name: "Install-DSCDependancy",  inline: "C:\\Install\\InstallDSCDependancy.ps1"

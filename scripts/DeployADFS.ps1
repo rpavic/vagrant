@@ -91,5 +91,12 @@ function Install-ADFS {
     catch {
         throw "Cannot install ADFS farm $DnsName"
     }
+
+    try {
+        Add-Content -Value "127.0.0.1 $DnsName" -Path "C:\Windows\system32\drivers\etc\hosts"
+    }
+    catch {
+        throw "Cannot add $DnsName to hosts file"
+    }
 }
 
