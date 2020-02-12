@@ -27,7 +27,7 @@ function Install-Code {
     }
     else {
         Write-Host "Installing Install-VSCode scipt from the PS Gallery."
-        Install-Script -Name Install-VSCode -RequiredVersion 1.3 -Force
+        Install-Script -Name Install-VSCode -Force
     }
 
     if ($Code) {
